@@ -6,8 +6,11 @@ router.route('/')
     .post(function (request, response) {
         var newsitem = new NewsItems.Model(request.body.newsitem);
         newsitem.save(function (error) {
-            if (error) response.send(error);
-            response.json({ newsitem: newsitem });
+            if (error) {
+                response.send(error)
+            } else {
+                response.send({ _id: newsitem._id });
+            }
         });
     })
     .get(function (request, response) {
@@ -37,6 +40,7 @@ router.route('/:item_id')
                 newsitem.body = request.body.newsitem.body;
                 newsitem.additional = request.body.newsitem.additional;
                 newsitem.image = request.body.newsitem.image;
+                newsitem.date = request.body.newsitem.date;
                 newsitem.save(function (error) {
                     if (error) {
                         response.send({ error: error });

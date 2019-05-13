@@ -4,7 +4,8 @@ var newsItemsSchema = mongoose.Schema(
         title: String,
         body: String,
         additional: String,
-        Image: String
+        image: String,
+        date: String
     }
 );
 var NewsItems = mongoose.model('newsitem', newsItemsSchema);
