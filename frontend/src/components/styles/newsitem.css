@@ -1,0 +1,26 @@
+.NewsItem #image{
+    background-color: whitesmoke;
+    object-fit: contain;
+}
+.NewsItem h1{
+    font-size: 1.5em;
+    margin-bottom: 0em;
+    text-decoration: none;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.NewsItem h2{
+    font-size: 0.75em;
+    margin-bottom: 0em;
+    padding-top: 1em;
+}
+.NewsItem #body{
+    padding-top: 2vw;
+    text-align: center;
+    font-size: 1vw;
+}
+.NewsItem #body p{
+    position: center;
+    vertical-align: middle;
+    font-size: 1vw;
+}

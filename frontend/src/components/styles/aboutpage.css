@@ -1,0 +1,22 @@
+.AboutPage p{
+    font-size: 1.5em;
+    color: black;
+    text-align: left;
+}
+.AboutPage a{
+    color: black;
+}
+.AboutPage a:hover{
+    cursor: pointer;
+    color: grey;
+    box-shadow: 10px 10px 8px black inset;
+}
+.AboutPage .drop:hover{
+    box-shadow: 10px 10px 8px black inset;
+}
+.AboutPage h1{
+    font-size: 2em;
+}
+.AboutPage h2{
+    font-size: 1em;
+}
