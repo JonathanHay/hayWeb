@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import "./styles/newspage.css";
 import NewsItem from "./newsitem";
+import backendLink from "../backendLink";
 import { Button, Icon, Modal, Grid, Input, TextArea, Header, List, Segment, Rail, Container } from 'semantic-ui-react'
+import $ from 'jquery';
 
 class NewsPage extends Component {
 
@@ -30,12 +32,15 @@ class NewsPage extends Component {
     }
 
     componentDidMount() {
+        $('html, body').animate({
+            scrollTop: $(".NewsPage").offset().top
+        });
         this.load();
     }
 
     async load() {
         var result = [];
-        var temp = await fetch("http://localhost:3001/newsitems")
+        var temp = await fetch(backendLink.BackendIP + "/newsitems")
             .then(function (response) {
                 return response.json();
             })
@@ -58,7 +63,7 @@ class NewsPage extends Component {
         var td = new Date();
         td = await (td.toString()).substr(4, 11);
         this.setState({ date: td });
-        var res = await fetch('http://localhost:3001/newsitems', {
+        var res = await fetch(backendLink.BackendIP + "/newsitems", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -128,6 +133,11 @@ class NewsPage extends Component {
     }
 
     CurrentItem(props) {
+        if (this.state.selected < 0) {
+            this.setState({
+                selected: 0
+            });
+        }
         if (props.length > 0) {
             return <NewsItem
                 i={this.state.selected}
@@ -192,13 +202,13 @@ class NewsPage extends Component {
                                 <h2><Header color="red" textAlign="left" style={{ width: "100%" }}>Latest Post</Header></h2>
                                 <Grid columns="equal" style={{ width: "100%" }}>
                                     <Grid.Column>
-                                        <Button onClick={() => { this.moveSelect(false) }} style={{ height: "100%" }}><Icon name="arrow left"></Icon></Button>
+                                        <Button onClick={() => { this.moveSelect(true) }} style={{ height: "100%" }}><Icon name="arrow left"></Icon></Button>
                                     </Grid.Column>
                                     <Grid.Column width={12}>
                                         <this.CurrentItem length={this.state.items.length}></this.CurrentItem>
                                     </Grid.Column>
                                     <Grid.Column>
-                                        <Button onClick={() => { this.moveSelect(true) }} style={{ height: "100%" }}><Icon name="arrow right"></Icon></Button>
+                                        <Button onClick={() => { this.moveSelect(false) }} style={{ height: "100%" }}><Icon name="arrow right"></Icon></Button>
                                     </Grid.Column>
                                 </Grid>
 
@@ -208,7 +218,7 @@ class NewsPage extends Component {
                             <Container>
                                 <Header textAlign="left" style={{ paddingTop: "0.7em", paddingBottom: "0em" }}>Previous Posts</Header>
                                 <List celled style={{ overflowY: "scroll", overflowX: "hidden", height: "30em" }}>
-                                    {this.state.items.map(function (item, index) {
+                                    {this.state.items.slice(0).reverse().map(function (item, index) {
                                         return <List.Item style={{ padding: "0", paddingTop: "1em" }} key={index}><NewsItem key={index} i={index} title={item.title} body={item.description} additional="-default" image={item.image} date={item.date} del={this.deletePost} thumb={true} sel={this.state.selected} select={this.selectItem} admin={false}></NewsItem></List.Item>;
                                     }.bind(this))}
                                 </List>

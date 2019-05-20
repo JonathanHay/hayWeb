@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "./styles/pageheader.css";
 import { Button } from 'semantic-ui-react';
+import $ from 'jquery';
 
 class PageHeader extends Component {
 
@@ -27,7 +28,6 @@ class PageHeader extends Component {
                     <span>Collaborator</span>
                     <span>Engineer</span>
                     <span>Student</span>
-                    <span>Educator</span>
                 </div>
                 <Button onClick={enter} inverted size="massive" style={{ marginTop: "30vh" }}>Enter</Button>
             </div>

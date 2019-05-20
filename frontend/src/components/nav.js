@@ -3,8 +3,9 @@ import { Menu, Button, Container, Header, Modal, Grid, Form, Segment, Message } 
 import AboutPage from "./aboutpage";
 import NewsPage from "./newspage";
 import ResumePage from "./resumepage";
-import ContactPage from "./contactpage";
 import ProjectsPage from "./projectspage";
+import Footer from "./footer";
+import $ from 'jquery';
 import firebase, { auth, provider } from './firebase.js';
 import "./styles/nav.css";
 
@@ -123,11 +124,13 @@ class Nav extends Component {
         } else if (this.state.sel === 1) {
             para = <NewsPage admin={this.state.admin}></NewsPage>;
         } else if (this.state.sel === 2) {
-            para = <ProjectsPage></ProjectsPage>;
+            para = <ProjectsPage admin={this.state.admin}></ProjectsPage>;
         } else if (this.state.sel === 3) {
-            para = <ContactPage></ContactPage>;
-        } else if (this.state.sel === 4) {
             para = <ResumePage></ResumePage>;
+        } else if (this.state.sel === 4) {
+            $('html, body').animate({
+                scrollTop: $(".Footer").offset().top
+            });
         }
 
         var modal =
@@ -201,16 +204,9 @@ class Nav extends Component {
                                 Projects
                             </Menu.Item>
                             <Menu.Item
-                                name='contact'
+                                name='resume'
                                 active={this.state.sel === 3}
                                 onClick={() => this.handleButton(3)}
-                            >
-                                Contact
-                            </Menu.Item>
-                            <Menu.Item
-                                name='resume'
-                                active={this.state.sel === 4}
-                                onClick={() => this.handleButton(4)}
                             >
                                 Resume
                             </Menu.Item>
@@ -221,9 +217,10 @@ class Nav extends Component {
                         </Menu>
                     </Container>
                 </div>
-                <Container id="content" >
+                <Container id="content" style={{ minHeight: "100vh" }}>
                     {para}
                 </Container>
+                <Footer></Footer>
             </div>
         );
     }
