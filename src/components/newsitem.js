@@ -12,14 +12,14 @@ class NewsItem extends Component {
             this.state = {
                 style: {
                     fontSize: "1em",
-                    height: "14em",
+                    minHeight: "14em",
                 },
                 showDetails: false
             };
         } else {
             this.state = {
                 style: {
-                    width: "100%",
+                    maxWidth: "100%",
                     height: "30em"
                 },
                 showDetails: false
@@ -87,7 +87,7 @@ class NewsItem extends Component {
                             <div>
                                 <a onClick={this.showDetails}>
                                     <h2><Header>{this.props.title}</Header></h2>
-                                    <Image style={{ height: "10em", width: "90%" }} id="image" src={this.props.image} fluid centered></Image>
+                                    <Image style={{ height: "10em", maxWidth: "90%" }} id="image" src={this.props.image} fluid centered></Image>
                                 </a>
                                 <NewsItemDetails title={this.props.title} body={this.props.body} additional={this.props.additional} image={this.props.image} date={this.props.date} thumb={true} ref={(ref) => { this.detailsModal = ref; }}></NewsItemDetails>
                             </div>

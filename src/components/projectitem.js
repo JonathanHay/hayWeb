@@ -129,20 +129,26 @@ class ProjectItem extends Component {
                     <this.renderNotThumb content={
                         <div>
                             <Grid>
-                                <Grid.Column width={1}>
-                                    <Button onClick={() => { this.moveSelect(false) }} style={{ height: "100%", width: "100%", textAlign: "center" }}><Button.Content><Icon name="arrow left"></Icon></Button.Content></Button>
-                                </Grid.Column>
                                 <Grid.Column width={10}>
-                                    <h1><Header>{this.props.title}</Header></h1>
-                                    {this.chooseImage(this.state.sel)}
-                                    <Card.Meta>
-                                        {this.props.date}
-                                    </Card.Meta>
+                                    <Grid columns="equal" verticalAlign='middle' style={{ width: "100%" }}>
+                                        <Grid.Row centered>
+                                            <h1><Header>{this.props.title}</Header></h1>
+                                            {this.chooseImage(this.state.sel)}
+                                            <Card.Meta>
+                                                {this.props.date}
+                                            </Card.Meta>
+                                        </Grid.Row>
+                                        <Grid.Row>
+                                            <Grid.Column style={{ textAlign: "center" }}>
+                                                <a onClick={() => { this.moveSelect(false) }} style={{ height: "100%" }}><Icon name="arrow left" size="massive"></Icon></a>
+                                            </Grid.Column>
+                                            <Grid.Column style={{ textAlign: "center" }} >
+                                                <a onClick={() => { this.moveSelect(true) }} style={{ minHeight: "100%" }}><Icon name="arrow right" size="massive" style={{ height: "100%" }}></Icon></a>
+                                            </Grid.Column>
+                                        </Grid.Row>
+                                    </Grid>
                                 </Grid.Column>
-                                <Grid.Column width={1}>
-                                    <Button onClick={() => { this.moveSelect(true) }} style={{ height: "100%", width: "100%" }}><Button.Content><Icon name="arrow right"></Icon></Button.Content></Button>
-                                </Grid.Column>
-                                <Grid.Column width={4}>
+                                <Grid.Column width={6}>
                                     <Grid.Row>
                                         <Header as="h3" content="Description"></Header>
                                         <p>{this.props.body}</p>

@@ -200,13 +200,13 @@ class ProjectPage extends Component {
                     <Grid.Row>
                         <h1><Header>Projects</Header></h1>
                     </Grid.Row>
-                    <Grid.Row>
+                    <Grid.Row style={{ paddingBottom: "5em" }}>
                         <this.CurrentItem x={this.state.items.length}></this.CurrentItem>
                     </Grid.Row>
                     <Grid.Row>
                         <Grid>
                             <Grid.Row>
-                                <Header textAlign="left" style={{ paddingTop: "0.7em", paddingBottom: "0em" }} content="Previous Posts"></Header>
+                                <Header textAlign="left" style={{ paddingTop: "0.7em", paddingBottom: "0em" }} content="All Projects"></Header>
                             </Grid.Row>
                             <Grid.Row>
                                 <List horizontal>
@@ -223,12 +223,12 @@ class ProjectPage extends Component {
                                 trigger={<Grid.Row centered><Button onClick={this.handleOpen} color="green">New Post&nbsp;<Icon name='plus' /></Button></Grid.Row>}
                                 open={this.state.modalOpen}
                                 onClose={this.handleClose}>
-                                <Modal.Header>New Post</Modal.Header>
+                                <Modal.Header>New Project</Modal.Header>
                                 <Modal.Content>
                                     <Grid columns="equal">
                                         <Grid.Row centered>
                                             <Grid.Column>
-                                                Post Title: <Input value={this.state.title} onChange={this.updateTit} placeholder="Title..."></Input>
+                                                Project Title: <Input value={this.state.title} onChange={this.updateTit} placeholder="Title..."></Input>
                                             </Grid.Column>
                                             <Grid.Column>
                                                 <Grid>

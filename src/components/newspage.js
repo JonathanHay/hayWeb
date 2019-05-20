@@ -192,29 +192,30 @@ class NewsPage extends Component {
     render() {
         return (
             <div className="NewsPage">
-                <Grid celled="internally">
+                <Grid celled="internally" centered>
                     <Grid.Row>
                         <h1><Header>News and Updates</Header></h1>
                     </Grid.Row>
                     <Grid.Row>
-                        <Grid.Column width={12}>
+                        <Grid.Column width={10}>
                             <Container>
                                 <h2><Header color="red" textAlign="left" style={{ width: "100%" }}>Latest Post</Header></h2>
-                                <Grid columns="equal" style={{ width: "100%" }}>
-                                    <Grid.Column>
-                                        <Button onClick={() => { this.moveSelect(true) }} style={{ height: "100%" }}><Icon name="arrow left"></Icon></Button>
-                                    </Grid.Column>
-                                    <Grid.Column width={12}>
+                                <Grid columns="equal" verticalAlign='middle' style={{ width: "100%" }}>
+                                    <Grid.Row centered>
                                         <this.CurrentItem length={this.state.items.length}></this.CurrentItem>
-                                    </Grid.Column>
-                                    <Grid.Column>
-                                        <Button onClick={() => { this.moveSelect(false) }} style={{ height: "100%" }}><Icon name="arrow right"></Icon></Button>
-                                    </Grid.Column>
+                                    </Grid.Row>
+                                    <Grid.Row>
+                                        <Grid.Column style={{ textAlign: "center" }}>
+                                            <a onClick={() => { this.moveSelect(true) }} style={{ height: "100%" }}><Icon name="arrow left" size="massive"></Icon></a>
+                                        </Grid.Column>
+                                        <Grid.Column style={{ textAlign: "center" }} >
+                                            <a onClick={() => { this.moveSelect(false) }} style={{ minHeight: "100%" }}><Icon name="arrow right" size="massive" style={{ height: "100%" }}></Icon></a>
+                                        </Grid.Column>
+                                    </Grid.Row>
                                 </Grid>
-
                             </Container>
                         </Grid.Column>
-                        <Grid.Column width={4} style={{ paddingTop: "0" }}>
+                        <Grid.Column width={6} style={{ paddingTop: "0" }}>
                             <Container>
                                 <Header textAlign="left" style={{ paddingTop: "0.7em", paddingBottom: "0em" }}>Previous Posts</Header>
                                 <List celled style={{ overflowY: "scroll", overflowX: "hidden", height: "30em" }}>

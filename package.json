@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "fetch": "^1.1.0",
+    "firebase": "^6.0.2",
     "gh-pages": "^2.0.1",
     "jquery": "^3.4.1",
     "react": "^16.8.6",
