@@ -218,7 +218,7 @@ class NewsPage extends Component {
                         <Grid.Column width={6} style={{ paddingTop: "0" }}>
                             <Container>
                                 <Header textAlign="left" style={{ paddingTop: "0.7em", paddingBottom: "0em" }}>Previous Posts</Header>
-                                <List celled style={{ overflowY: "scroll", overflowX: "hidden", height: "30em" }}>
+                                <List celled style={{ overflowY: "scroll", overflowX: "hidden", height: "45em" }}>
                                     {this.state.items.slice(0).reverse().map(function (item, index) {
                                         return <List.Item style={{ padding: "0", paddingTop: "1em" }} key={index}><NewsItem key={index} i={index} title={item.title} body={item.description} additional="-default" image={item.image} date={item.date} del={this.deletePost} thumb={true} sel={this.state.selected} select={this.selectItem} admin={false}></NewsItem></List.Item>;
                                     }.bind(this))}
