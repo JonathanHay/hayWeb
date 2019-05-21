@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "./styles/newspage.css";
 import NewsItem from "./newsitem";
 import backendLink from "../backendLink";
-import { Button, Icon, Modal, Grid, Input, TextArea, Header, List, Segment, Rail, Container } from 'semantic-ui-react'
+import { Button, Icon, Modal, Grid, Input, TextArea, Header, List, Segment, Rail, Container, Responsive } from 'semantic-ui-react'
 import $ from 'jquery';
 
 class NewsPage extends Component {
@@ -192,12 +192,12 @@ class NewsPage extends Component {
     render() {
         return (
             <div className="NewsPage">
-                <Grid celled="internally" centered>
+                <Grid celled="internally" centered columns="equal">
                     <Grid.Row>
                         <h1><Header>News and Updates</Header></h1>
                     </Grid.Row>
                     <Grid.Row>
-                        <Grid.Column width={10}>
+                        <Grid.Column>
                             <Container>
                                 <h2><Header color="red" textAlign="left" style={{ width: "100%" }}>Latest Post</Header></h2>
                                 <Grid columns="equal" verticalAlign='middle' style={{ width: "100%" }}>
@@ -215,18 +215,30 @@ class NewsPage extends Component {
                                 </Grid>
                             </Container>
                         </Grid.Column>
-                        <Grid.Column width={6} style={{ paddingTop: "0" }}>
+                        <Responsive as={Grid.Column} width={6} {...Responsive.onlyComputer}>
                             <Container>
                                 <Header textAlign="left" style={{ paddingTop: "0.7em", paddingBottom: "0em" }}>Previous Posts</Header>
-                                <List celled style={{ overflowY: "scroll", overflowX: "hidden", height: "45em" }}>
-                                    {this.state.items.slice(0).reverse().map(function (item, index) {
-                                        return <List.Item style={{ padding: "0", paddingTop: "1em" }} key={index}><NewsItem key={index} i={index} title={item.title} body={item.description} additional="-default" image={item.image} date={item.date} del={this.deletePost} thumb={true} sel={this.state.selected} select={this.selectItem} admin={false}></NewsItem></List.Item>;
-                                    }.bind(this))}
-                                </List>
+                                <Grid celled>
+                                    <List divided style={{ overflowY: "scroll", overflowX: "hidden", height: "45em" }}>
+                                        {this.state.items.slice(0).reverse().map(function (item, index) {
+                                            return <List.Item style={{ padding: "0", paddingTop: "1em" }} key={index}><NewsItem key={index} i={index} title={item.title} body={item.description} additional="-default" image={item.image} date={item.date} del={this.deletePost} thumb={true} sel={this.state.selected} select={this.selectItem} admin={false}></NewsItem></List.Item>;
+                                        }.bind(this))}
+                                    </List>
+                                </Grid>
                             </Container>
-                        </Grid.Column>
+                        </Responsive>
                     </Grid.Row>
                 </Grid>
+                <Responsive {...Responsive.onlyMobile}>
+                    <Header textAlign="left" style={{ paddingTop: "0.7em", paddingBottom: "0em" }}>Previous Posts</Header>
+                    <Grid celled >
+                        <List celled style={{ height: "30em", overflowX: "hidden", overflowY: "scroll" }}>
+                            {this.state.items.slice(0).reverse().map(function (item, index) {
+                                return <List.Item style={{ padding: "0", paddingTop: "1em" }} key={index}><NewsItem key={index} i={index} title={item.title} body={item.description} additional="-default" image={item.image} date={item.date} del={this.deletePost} thumb={true} sel={this.state.selected} select={this.selectItem} admin={false}></NewsItem></List.Item>;
+                            }.bind(this))}
+                        </List>
+                    </Grid>
+                </Responsive>
                 <Grid>
                     <this.adminView content={
                         <Modal

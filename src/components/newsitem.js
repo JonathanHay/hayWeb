@@ -20,7 +20,7 @@ class NewsItem extends Component {
             this.state = {
                 style: {
                     maxWidth: "100%",
-                    height: "30em"
+                    height: "25em"
                 },
                 showDetails: false
             };

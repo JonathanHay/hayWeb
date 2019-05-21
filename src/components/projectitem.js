@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./styles/projectitem.css";
-import { Modal, Grid, Button, Icon, Card, Reveal, Header, Image, Container } from "semantic-ui-react";
+import { Modal, Grid, Button, Icon, Card, Responsive, Header, Image, Container } from "semantic-ui-react";
 
 class ProjectItem extends Component {
     //Additional will be on standalone page
@@ -21,7 +21,7 @@ class ProjectItem extends Component {
             this.state = {
                 style: {
                     width: "100%",
-                    height: "30em"
+                    minHeight: "35em"
                 },
                 sel: 1,
                 showDetails: false
@@ -33,10 +33,11 @@ class ProjectItem extends Component {
         this.deletePost = this.deletePost.bind(this);
         this.renderThumb = this.renderThumb.bind(this);
         this.renderNotThumb = this.renderNotThumb.bind(this);
-        this.showDetails = this.showDetails.bind(this);
+        this.toggleDetails = this.toggleDetails.bind(this);
         this.adminView = this.adminView.bind(this);
         this.moveSelect = this.moveSelect.bind(this);
         this.chooseImage = this.chooseImage.bind(this);
+        this.renderDetailButton = this.renderDetailButton.bind(this);
     }
 
     handleClose() {
@@ -55,8 +56,10 @@ class ProjectItem extends Component {
         this.handleClose();
     }
 
-    showDetails() {
-        this.detailsModal.handleOpen();
+    toggleDetails() {
+        this.setState({
+            showDetails: !this.state.showDetails
+        });
     }
 
     renderNotThumb(el) {
@@ -102,18 +105,31 @@ class ProjectItem extends Component {
     }
 
     chooseImage(x) {
-        if (x === 1) {
-            return <Image style={{ height: "20em", width: "50em", backgroundColor: "whitesmoke", objectFit: "contain" }} src={this.props.image1} centered fluid></Image>;
-        } else if (x === 2) {
-            return <Image style={{ height: "20em", width: "50em", backgroundColor: "whitesmoke", objectFit: "contain" }} src={this.props.image2} centered fluid></Image>;
-        } else if (x === 3) {
-            return <Image style={{ height: "20em", width: "50em", backgroundColor: "whitesmoke", objectFit: "contain" }} src={this.props.image3} centered fluid></Image>;
+        if (this.state.showDetails) {
+            return <p>{this.props.body}</p>
         } else {
-            return null;
+            if (x === 1) {
+                return <Image style={{ height: "20em", width: "50em", backgroundColor: "whitesmoke", objectFit: "contain" }} src={this.props.image1} centered fluid></Image>;
+            } else if (x === 2) {
+                return <Image style={{ height: "20em", width: "50em", backgroundColor: "whitesmoke", objectFit: "contain" }} src={this.props.image2} centered fluid></Image>;
+            } else if (x === 3) {
+                return <Image style={{ height: "20em", width: "50em", backgroundColor: "whitesmoke", objectFit: "contain" }} src={this.props.image3} centered fluid></Image>;
+            } else {
+                return null;
+            }
+        }
+    }
+
+    renderDetailButton() {
+        if (this.state.showDetails) {
+            return <Button onClick={this.toggleDetails}>Hide Details</Button>;
+        } else {
+            return <Button onClick={this.toggleDetails}>Show Details</Button>;
         }
     }
 
     render() {
+
         return (
             <div className="ProjectItem" style={this.state.style}>
                 <Grid centered>
@@ -128,7 +144,7 @@ class ProjectItem extends Component {
                     }></this.renderThumb>
                     <this.renderNotThumb content={
                         <div>
-                            <Grid>
+                            <Grid centered>
                                 <Grid.Column width={10}>
                                     <Grid columns="equal" verticalAlign='middle' style={{ width: "100%" }}>
                                         <Grid.Row centered>
@@ -138,6 +154,7 @@ class ProjectItem extends Component {
                                                 {this.props.date}
                                             </Card.Meta>
                                         </Grid.Row>
+                                        <Grid.Row centered><Responsive {...Responsive.onlyMobile}>{this.renderDetailButton()}</Responsive></Grid.Row>
                                         <Grid.Row>
                                             <Grid.Column style={{ textAlign: "center" }}>
                                                 <a onClick={() => { this.moveSelect(false) }} style={{ height: "100%" }}><Icon name="arrow left" size="massive"></Icon></a>
@@ -148,12 +165,12 @@ class ProjectItem extends Component {
                                         </Grid.Row>
                                     </Grid>
                                 </Grid.Column>
-                                <Grid.Column width={6}>
+                                <Responsive as={Grid.Column} {...Responsive.onlyComputer} width={6}>
                                     <Grid.Row>
                                         <Header as="h3" content="Description"></Header>
                                         <p>{this.props.body}</p>
                                     </Grid.Row>
-                                </Grid.Column>
+                                </Responsive>
                             </Grid>
                         </div>
                     }></this.renderNotThumb>

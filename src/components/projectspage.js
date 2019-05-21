@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "./styles/projectspage.css";
 import backendLink from "../backendLink";
 import ProjectItem from "./projectitem";
-import { Button, Icon, Modal, Grid, Input, TextArea, Header, List, Segment, Rail, Container } from 'semantic-ui-react'
+import { Button, Icon, Modal, Grid, Input, TextArea, Header, List, Segment, Responsive } from 'semantic-ui-react'
 import $ from 'jquery';
 
 class ProjectPage extends Component {
@@ -177,14 +177,6 @@ class ProjectPage extends Component {
         }
     }
 
-    selectTrigger() {
-        if (this.props.thumb) {
-            return null;
-        } else {
-            return <Grid.Row centered><Button onClick={this.handleOpen} color="blue">Details&nbsp;</Button></Grid.Row>;
-        }
-    }
-
     adminView(x) {
         if (this.props.admin === true) {
             return x.content;
@@ -200,7 +192,7 @@ class ProjectPage extends Component {
                     <Grid.Row>
                         <h1><Header>Projects</Header></h1>
                     </Grid.Row>
-                    <Grid.Row style={{ paddingBottom: "5em" }}>
+                    <Grid.Row centered style={{ paddingBottom: "5em", paddingTop: "3em" }}>
                         <this.CurrentItem x={this.state.items.length}></this.CurrentItem>
                     </Grid.Row>
                     <Grid.Row>
